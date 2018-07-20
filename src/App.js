@@ -16,6 +16,10 @@ class BooksApp extends React.Component {
     })
   }
 
+  handleChange() {
+    console.log("hello world")
+  }
+
   render() {
     return (
       <div className="app">

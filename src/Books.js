@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 
-
-
 function Books (props) {
 	return (
 	  <div className="list-books">
@@ -23,7 +21,7 @@ function Books (props) {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select defaultValue={books.shelf}>
+	                          <select defaultValue={books.shelf} onChange={props.handleChange}>
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -52,7 +50,7 @@ function Books (props) {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select defaultValue={books.shelf}>
+	                          <select defaultValue={books.shelf} onChange={props.handleChange}>
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -81,7 +79,7 @@ function Books (props) {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select defaultValue={books.shelf}>
+	                          <select defaultValue={books.shelf} onChange={props.handleChange}>
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
