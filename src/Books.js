@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import PropTypes from 'prop-types'
 
-function Books (props) {
-	return (
+class Books extends Component {
+	  handleChange(event) {
+	    this.setState({shelf: event.target.value})
+	    console.log("hello")
+	  }
+
 	  <div className="list-books">
 	    <div className="list-books-title">
 	      <h1>MyReads</h1>
@@ -14,7 +19,7 @@ function Books (props) {
 	          <h2 className="bookshelf-title">Currently Reading</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {props.books.filter(books => books.shelf === "currentlyReading").map((books) =>(
+	              {this.props.books.filter(books => books.shelf === "currentlyReading").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
@@ -43,7 +48,7 @@ function Books (props) {
 	          <h2 className="bookshelf-title">Want to Read</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {props.books.filter(books => books.shelf === "wantToRead").map((books) =>(
+	              {this.props.books.filter(books => books.shelf === "wantToRead").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
@@ -72,7 +77,7 @@ function Books (props) {
 	          <h2 className="bookshelf-title">Read</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {props.books.filter(books => books.shelf === "read").map((books) =>(
+	              {this.props.books.filter(books => books.shelf === "read").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
@@ -108,8 +113,11 @@ function Books (props) {
 
 	    </div>
 	  </div>
-	)
+
+	  )
+	}
 }
+
 
 
 export default Books
