@@ -4,10 +4,22 @@ import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
 
 class Books extends Component {
-	  handleChange(event) {
-	    this.setState({shelf: event.target.value})
-	    console.log("hello")
-	  }
+  state = {
+    books: []
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll().then((books) => {
+      console.log(this.props.books)
+      this.setState( { books } )
+    })
+  }
+
+  updateBooks(event){
+  	console.log(event)
+  }
+	render() {
+		return (
 
 	  <div className="list-books">
 	    <div className="list-books-title">
@@ -19,14 +31,14 @@ class Books extends Component {
 	          <h2 className="bookshelf-title">Currently Reading</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {this.props.books.filter(books => books.shelf === "currentlyReading").map((books) =>(
+	              {this.state.books.filter(books => books.shelf === "currentlyReading").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select defaultValue={books.shelf} onChange={props.handleChange}>
+	                          <select onChange={(event) => this.state.books.updateBooks(event.target.value, books)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -48,14 +60,14 @@ class Books extends Component {
 	          <h2 className="bookshelf-title">Want to Read</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {this.props.books.filter(books => books.shelf === "wantToRead").map((books) =>(
+	              {this.state.books.filter(books => books.shelf === "wantToRead").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select defaultValue={books.shelf} onChange={props.handleChange}>
+	                          <select onChange={(event) => this.state.books.updateBooks(event.target.value, books)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -77,14 +89,14 @@ class Books extends Component {
 	          <h2 className="bookshelf-title">Read</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {this.props.books.filter(books => books.shelf === "read").map((books) =>(
+	              {this.state.books.filter(books => books.shelf === "read").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select defaultValue={books.shelf} onChange={props.handleChange}>
+	                          <select onChange={(event) => this.state.books.updateBooks(event.target.value, books)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -114,10 +126,61 @@ class Books extends Component {
 	    </div>
 	  </div>
 
-	  )
+
+
+		)
 	}
 }
 
 
+	  
+
+
 
 export default Books
+
+
+
+
+// // Root Component
+// // React -- Data flows from Parent to child -- Unidirectionally
+// class Factory extends Component {
+//   state = {
+//     isOpen: false,
+//     Assemblies: [],
+//   }
+
+//   componentDidMount() {
+// 	FactoryAPI.getAssemblies()
+// .then( (result) => this.setState({ Assemblies: result }))
+//   }
+  
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+
+//   handleStatusUpdate = (event) => {
+// 	FactoryAPI.updateAssembly()
+// .then( … code … )
+
+//     const providedUpdate = event.target.value
+//     this.setState({ isOpen: providedUpdate })
+//   }
+  
+//    render() {
+//     return (
+//       <AssemblyLine handleUpdate={this.handleStatusUpdate}
+// handleRiot={} /> 
+//     )
+//   }
+// }
+
+// // https://sitepoint.com/es6-destructuring-assignment/
+
+// class AssemblyLine extends Component {
+//    render() {
+// 	Const { handleUpdate } = this.props;
+
+//      return (
+//       <InputTextField onChange={(e) => handleUpdate (e)} /> 
+//     )
+//   }
+// }
