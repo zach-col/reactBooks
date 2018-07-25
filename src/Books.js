@@ -4,6 +4,7 @@ import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
 
 class Books extends Component {
+	
   state = {
     books: []
   }
@@ -16,15 +17,13 @@ class Books extends Component {
   }
 
   updateBooks(book, shelf){
-    console.log("book id is",book.id)
-    console.log("book shelf is",shelf)
     BooksAPI.update(book, shelf).then((books) => {
-      this.setState( { books } )
-      console.log(this.state.books)
-	  // componentDidUpdate(prevProps) {
-	  //   this.fetchData(this.props.userID);
-	  // }
+	    BooksAPI.getAll().then((books) => {
+	      this.setState( { books } )
+	      console.log(this.state.books)
+	    })
     })
+
   }
 
 	render() {
