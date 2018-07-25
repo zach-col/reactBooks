@@ -4,7 +4,7 @@ import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
 
 class Books extends Component {
-	
+
   state = {
     books: []
   }
@@ -146,49 +146,3 @@ class Books extends Component {
 
 
 export default Books
-
-
-
-
-// // Root Component
-// // React -- Data flows from Parent to child -- Unidirectionally
-// class Factory extends Component {
-//   state = {
-//     isOpen: false,
-//     Assemblies: [],
-//   }
-
-//   componentDidMount() {
-// 	FactoryAPI.getAssemblies()
-// .then( (result) => this.setState({ Assemblies: result }))
-//   }
-  
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
-
-//   handleStatusUpdate = (event) => {
-// 	FactoryAPI.updateAssembly()
-// .then( … code … )
-
-//     const providedUpdate = event.target.value
-//     this.setState({ isOpen: providedUpdate })
-//   }
-  
-//    render() {
-//     return (
-//       <AssemblyLine handleUpdate={this.handleStatusUpdate}
-// handleRiot={} /> 
-//     )
-//   }
-// }
-
-// // https://sitepoint.com/es6-destructuring-assignment/
-
-// class AssemblyLine extends Component {
-//    render() {
-// 	Const { handleUpdate } = this.props;
-
-//      return (
-//       <InputTextField onChange={(e) => handleUpdate (e)} /> 
-//     )
-//   }
-// }
