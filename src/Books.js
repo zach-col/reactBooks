@@ -10,14 +10,16 @@ class Books extends Component {
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log(this.props.books)
       this.setState( { books } )
+      console.log(this.state.books)
     })
   }
 
-  updateBooks(event){
-  	console.log(event)
+  updateBooks(id, shelf){
+    console.log("id is",id)
+    console.log("shelf is",shelf)
   }
+
 	render() {
 		return (
 
@@ -38,7 +40,7 @@ class Books extends Component {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select onChange={(event) => this.state.books.updateBooks(event.target.value, books)} defaultValue={books.shelf} >
+                            <select onChange={(event) => this.updateBooks(books.id, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -67,7 +69,7 @@ class Books extends Component {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select onChange={(event) => this.state.books.updateBooks(event.target.value, books)} defaultValue={books.shelf} >
+                            <select onChange={(event) => this.updateBooks(books.id, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -96,7 +98,7 @@ class Books extends Component {
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-	                          <select onChange={(event) => this.state.books.updateBooks(event.target.value, books)} defaultValue={books.shelf} >
+                            <select onChange={(event) => this.updateBooks(books.id, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
