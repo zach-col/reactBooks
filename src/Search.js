@@ -29,17 +29,27 @@ class Search extends Component {
     })
   }
 
-  updateQuery = (query)=> {
-      this.setState({query: query.trim()})
-      BooksAPI.search(query, 15).then((books) => {
-        this.setState( { books: books} )
-        console.log(this.state.books)
 
-      })
-
+  updateQuery(query){
+    this.setState({query: query.trim()})
+    BooksAPI.search(query).then((books) => {
+          this.setState( { books } )
+          console.log(this.state.books)
+    })
   }
 
   render() {
+    let showingBooks
+    if (this.state.query) {
+      const match = new RegExp(escapeRegExp(this.state.query), 'i')
+      showingBooks = this.state.books.filter((books) => match.test(books.title) )
+    } else {
+      showingBooks = this.state.books
+    }
+    // BooksAPI.search(query, 10).then((books) => {
+    //   this.setState( { books } )
+    //   console.log(this.state.books)
+    // })
 
     return (
 
@@ -67,7 +77,7 @@ class Search extends Component {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {this.state.books.filter(books => books.shelf).map((books) =>(
+          {this.state.books.map((books) =>(
             <li key={books.id}>
               <div className="book">
                 <div className="book-top">
