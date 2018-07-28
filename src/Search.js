@@ -24,7 +24,13 @@ class Search extends Component {
   updateQuery(query){
     this.setState({query: query})
     BooksAPI.search(query).then((books) => {
-          this.setState( { books: books } )
+      if(books.error){
+        this.setState({ books: [] })
+      } else {
+        this.setState({books: books})
+      }
+    }).catch((e) => {
+      this.setState({ books: []})
     })
   }
 
@@ -60,9 +66,6 @@ class Search extends Component {
         </div>
       </div>
       <div className="search-books-results">
-            <h1>{JSON.stringify(this.state.query)}</h1>
-            <h1>{JSON.stringify(this.state.books.length)}</h1>
-
         <ol className="books-grid">
           {showingBooks.map((books) =>(
             <li key={books.id}>
