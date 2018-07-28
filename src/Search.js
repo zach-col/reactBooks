@@ -13,44 +13,28 @@ class Search extends Component {
     noBooks: []
   }
 
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState( { books } )
-      console.log(this.state.books)
-    })
-  }
-
   updateBooks(book, shelf){
     BooksAPI.update(book, shelf).then((books) => {
-      BooksAPI.getAll().then((books) => {
         this.setState( { books } )
         console.log(this.state.books)
-      })
     })
   }
 
 
   updateQuery(query){
-    this.setState({query: query.trim()})
+    this.setState({query: query})
     BooksAPI.search(query).then((books) => {
-          this.setState( { books } )
-          console.log(this.state.books)
+          this.setState( { books: books } )
     })
   }
 
   render() {
     let showingBooks
-    if (this.state.query) {
-      const match = new RegExp(escapeRegExp(this.state.query), 'i')
-      showingBooks = this.state.books.filter((books) => match.test(books.title) )
-    } else {
+    if (this.state.books) {
       showingBooks = this.state.books
+    } else {
+      showingBooks = []
     }
-    // BooksAPI.search(query, 10).then((books) => {
-    //   this.setState( { books } )
-    //   console.log(this.state.books)
-    // })
-
     return (
 
     <div className="search-books">
@@ -76,8 +60,11 @@ class Search extends Component {
         </div>
       </div>
       <div className="search-books-results">
+            <h1>{JSON.stringify(this.state.query)}</h1>
+            <h1>{JSON.stringify(this.state.books.length)}</h1>
+
         <ol className="books-grid">
-          {this.state.books.map((books) =>(
+          {showingBooks.map((books) =>(
             <li key={books.id}>
               <div className="book">
                 <div className="book-top">
