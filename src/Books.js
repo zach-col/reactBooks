@@ -4,31 +4,11 @@ import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
 
 class Books extends Component {
-
-  state = {
-    books: []
-  }
-
-  componentDidMount() {
-    BooksAPI.getAll().then((books) => {
-      this.setState( { books } )
-      console.log(this.state.books)
-    })
-  }
-
-  updateBooks(book, shelf){
-    BooksAPI.update(book, shelf).then((books) => {
-	    BooksAPI.getAll().then((books) => {
-	      this.setState( { books } )
-	      console.log(this.state.books)
-	    })
-    })
-
-  }
-
+  
 	render() {
-		return (
+	      console.log(this.props.books)
 
+		return (
 	  <div className="list-books">
 	    <div className="list-books-title">
 	      <h1>MyReads</h1>
@@ -39,14 +19,14 @@ class Books extends Component {
 	          <h2 className="bookshelf-title">Currently Reading</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {this.state.books.filter(books => books.shelf === "currentlyReading").map((books) =>(
+	              {this.props.books.filter(books => books.shelf === "currentlyReading").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-                            <select onChange={(event) => this.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
+                            <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -68,14 +48,14 @@ class Books extends Component {
 	          <h2 className="bookshelf-title">Want to Read</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {this.state.books.filter(books => books.shelf === "wantToRead").map((books) =>(
+	              {this.props.books.filter(books => books.shelf === "wantToRead").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-                            <select onChange={(event) => this.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
+                            <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>
@@ -97,14 +77,14 @@ class Books extends Component {
 	          <h2 className="bookshelf-title">Read</h2>
 	          <div className="bookshelf-books">
 	            <ol className="books-grid">
-	              {this.state.books.filter(books => books.shelf === "read").map((books) =>(
+	              {this.props.books.filter(books => books.shelf === "read").map((books) =>(
 
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
 	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
 	                        <div className="book-shelf-changer">
-                            <select onChange={(event) => this.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
+                            <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
 	                            <option value="currentlyReading">Currently Reading</option>
 	                            <option value="wantToRead">Want to Read</option>

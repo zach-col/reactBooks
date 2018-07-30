@@ -6,41 +6,38 @@ import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 class Search extends Component {
+  //  state = {
+  //   books: [],
+  //   query: '',
+  //   noBooks: []
+  // }
 
-  state = {
-    books: [],
-    query: '',
-    noBooks: []
-  }
-
-  updateBooks(book, shelf){
-    BooksAPI.update(book, shelf).then((books) => {
-        this.setState( { books } )
-        console.log(this.state.books)
-    })
-  }
+  // updateBooks(book, shelf){
+  //   BooksAPI.update(book, shelf).then((books) => {
+  //       this.setState( { books } )
+  //       console.log(this.state.books)
+  //   })
+  // }
 
 
-  updateQuery(query){
-    this.setState({query: query})
-    BooksAPI.search(query).then((books) => {
-      if(books.error){
-        this.setState({ books: [] })
-      } else {
-        this.setState({books: books})
-      }
-    }).catch((e) => {
-      this.setState({ books: []})
-    })
-  }
 
+  // updateQuery(query){
+  //   this.setState({query: query})
+  //   BooksAPI.search(query).then((books) => {
+
+  //       // this.setState({books: books})
+
+  //       console.log(this.state.books)
+      
+  //   })
+  // }
   render() {
-    let showingBooks
-    if (this.state.books) {
-      showingBooks = this.state.books
-    } else {
-      showingBooks = []
-    }
+    // let showingBooks
+    // if (this.state.books) {
+    //   showingBooks = this.state.books
+    // } else {
+    //   showingBooks = []
+    // }
     return (
 
     <div className="search-books">
@@ -67,7 +64,7 @@ class Search extends Component {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {showingBooks.map((books) =>(
+          {this.props.books.map((books) =>(
             <li key={books.id}>
               <div className="book">
                 <div className="book-top">
