@@ -6,40 +6,32 @@ import escapeRegExp from 'escape-string-regexp'
 import sortBy from 'sort-by'
 
 class Search extends Component {
-  //  state = {
-  //   books: [],
-  //   query: '',
-  //   noBooks: []
-  // }
+   state = {
+    books: [],
+    query: ''
+  }
 
-  // updateBooks(book, shelf){
-  //   BooksAPI.update(book, shelf).then((books) => {
-  //       this.setState( { books } )
-  //       console.log(this.state.books)
-  //   })
-  // }
+  updateQuery = (query) => {
+    this.setState({query: query})
+    this.searchQueryBooks(query)
+  }
 
+  searchQueryBooks = (query) => {
+    if(query){
+      BooksAPI.search(query).then((books) => {
+        if (books.error){
+          this.setState({books: [] })
+        } else {
+          this.setState({ books })
+        }
+      })
+    } else {
+        this.setState({ books: [] })
+    }
+  }
 
-
-  // updateQuery(query){
-  //   this.setState({query: query})
-  //   BooksAPI.search(query).then((books) => {
-
-  //       // this.setState({books: books})
-
-  //       console.log(this.state.books)
-      
-  //   })
-  // }
   render() {
-    // let showingBooks
-    // if (this.state.books) {
-    //   showingBooks = this.state.books
-    // } else {
-    //   showingBooks = []
-    // }
     return (
-
     <div className="search-books">
       <div className="search-books-bar">
         <Link
@@ -64,13 +56,14 @@ class Search extends Component {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {this.props.books.map((books) =>(
+          {this.state.books.map((books) =>(
             <li key={books.id}>
               <div className="book">
                 <div className="book-top">
-                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
+
+                  <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
                   <div className="book-shelf-changer">
-                    <select onChange={(event) => this.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
+                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
                       <option value="move" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>

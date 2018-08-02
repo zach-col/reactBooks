@@ -4,10 +4,9 @@ import * as BooksAPI from './BooksAPI'
 import PropTypes from 'prop-types'
 
 class Books extends Component {
-  
-	render() {
-	      console.log(this.props.books)
 
+	render() {
+		console.log(this.props.books)
 		return (
 	  <div className="list-books">
 	    <div className="list-books-title">
@@ -24,7 +23,7 @@ class Books extends Component {
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
-	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
+	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
 	                        <div className="book-shelf-changer">
                             <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
@@ -53,7 +52,7 @@ class Books extends Component {
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
-	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
+	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
 	                        <div className="book-shelf-changer">
                             <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
@@ -82,7 +81,7 @@ class Books extends Component {
 	                  <li key={books.id}>
 	                    <div className="book">
 	                      <div className="book-top">
-	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks.thumbnail})` }}></div>
+	                        <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
 	                        <div className="book-shelf-changer">
                             <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
 	                            <option value="move" disabled>Move to...</option>
@@ -103,9 +102,7 @@ class Books extends Component {
 	        </div>
 	      </div>
 	    </div>
-
-
-
+	    
 	    <div className="open-search">
 	    	<Link
 	    	  to="/Search"
@@ -113,16 +110,8 @@ class Books extends Component {
 
 	    </div>
 	  </div>
-
-
-
 		)
 	}
 }
-
-
-	  
-
-
 
 export default Books
