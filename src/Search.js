@@ -23,6 +23,7 @@ class Search extends Component {
           this.setState({books: [] })
         } else {
           this.setState({ books })
+          console.log(this.state.books)
         }
       })
     } else {
@@ -63,7 +64,7 @@ class Search extends Component {
 
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
                   <div className="book-shelf-changer">
-                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf} >
+                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf === this.state.books.shelf ? books.shelf : null }>
                       <option value="move" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
