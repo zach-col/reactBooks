@@ -23,7 +23,6 @@ class Search extends Component {
           this.setState({books: [] })
         } else {
           this.setState({ books })
-          console.log(this.state.books)
         }
       })
     } else {
@@ -32,6 +31,16 @@ class Search extends Component {
   }
 
   render() {
+    {this.state.books.map(books =>{
+      this.props.myBooks.map(book => {
+        book.id === this.state.books.id ? shelf = book.shelf : 'none'
+        console.log(book.shelf)
+      })
+    })}
+    let shelf = "none"
+
+    // console.log("main books",this.props.myBooks.length)
+    // console.log("searched books", this.state.books.length)
     return (
     <div className="search-books">
       <div className="search-books-bar">
@@ -57,14 +66,13 @@ class Search extends Component {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {this.state.books.map((books) =>(
+          {this.state.books.map(books =>(
             <li key={books.id}>
               <div className="book">
                 <div className="book-top">
-
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
                   <div className="book-shelf-changer">
-                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf === this.state.books.shelf ? books.shelf : null }>
+                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.shelf}>
                       <option value="move" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
