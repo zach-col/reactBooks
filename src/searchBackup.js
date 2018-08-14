@@ -32,8 +32,14 @@ class Search extends Component {
 
   render() {
     let shelf = "none"
-    console.log("main books",this.props.myBooks.length)
-    console.log("searched books", this.state.books.length)
+
+    // {this.state.books.map(books =>{
+    //   this.props.myBooks.map(book => {
+    //     books.id === book.id ? shelf = book.shelf : 'none'
+    //   })
+    // })}
+    // console.log("main books",this.props.myBooks.length)
+    // console.log("searched books", this.state.books.length)
     return (
     <div className="search-books">
       <div className="search-books-bar">
