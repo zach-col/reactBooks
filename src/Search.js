@@ -28,6 +28,8 @@ class Search extends Component {
     } else {
         this.setState({ books: [] })
     }
+    console.log(this.props.books)
+
   }
 
   render() {
@@ -59,14 +61,17 @@ class Search extends Component {
       </div>
       <div className="search-books-results">
         <ol className="books-grid">
-          {this.state.books.map(books =>(
-            this.props.myBooks.map(book =>(
+          {this.state.books.map(books => {
+              this.props.books.map(book => (
+                book.id === books.id ? shelf = book.shelf : 'none'
+              ))
+            return (
             <li key={books.id}>
               <div className="book">
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${books.imageLinks ? books.imageLinks.thumbnail : "https://via.placeholder.com/128x193?text=No%20Cover%20Image"})` }}></div>
                   <div className="book-shelf-changer">
-                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={books.id === book.id ? shelf = book.shelf : 'none'}>
+                    <select onChange={(event) => this.props.updateBooks(books, event.target.value)} defaultValue={shelf}>
                       <option value="move" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>
@@ -77,13 +82,10 @@ class Search extends Component {
                 </div>
                 <div className="book-title">{books.title}</div>
                 <div className="book-authors">{books.authors}</div>
-                <p>{books.id === book.id ? shelf = book.shelf : 'none'}</p>
-                <p>{books.id}</p>
-                <p>{book.id}</p>
               </div>
             </li>
-            ))
-          ))}
+              )
+          })}
         </ol>
       </div>
     </div>
