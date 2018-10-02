@@ -21,4 +21,3 @@ React API project
 - https://reactjs.org/docs/handling-events.html
 - https://reactjs.org/docs/state-and-lifecycle.html
 - https://stackoverflow.com/questions/39837893/react-can-i-check-if-a-state-exists-before-rendering-it
-- 
